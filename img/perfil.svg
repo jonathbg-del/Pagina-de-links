@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <defs>
+    <radialGradient id="g" cx="35%" cy="30%" r="80%">
+      <stop offset="0" stop-color="#ff5c9d"/>
+      <stop offset="0.55" stop-color="#b3124f"/>
+      <stop offset="1" stop-color="#3d0420"/>
+    </radialGradient>
+  </defs>
+  <rect width="200" height="200" fill="url(#g)"/>
+  <text x="100" y="125" text-anchor="middle" font-family="Georgia, serif" font-size="78" font-style="italic" fill="#fff5f9">PS</text>
+</svg>
