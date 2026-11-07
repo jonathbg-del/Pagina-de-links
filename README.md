@@ -32,10 +32,9 @@ Esse é o link que você coloca na bio do Instagram, TikTok, etc.
 2. Mude o que quiser — a prévia do celular atualiza na hora. Dá para enviar fotos direto do celular/computador.
 3. Clique em **Publicar no site**. Em 1–2 minutos o site atualiza.
 4. Na primeira vez, o editor pede uma **chave de acesso (token)** do GitHub, que fica salva só naquele aparelho:
-   - abra https://github.com/settings/personal-access-tokens/new
-   - **Repository access** → *Only select repositories* → marque `Pagina-de-links`
-   - **Permissions → Contents** → *Read and write*
-   - **Generate token**, copie e cole no editor.
+   - abra https://github.com/settings/tokens/new?scopes=public_repo&description=Editor%20pagina%20de%20links
+   - **Expiration** → *No expiration*; confira se **public_repo** está marcado
+   - **Generate token**, copie o código (começa com `ghp_`) e cole no editor.
 
 Sem token, também dá para clicar em **Baixar config.js** e enviar o arquivo pelo GitHub (**Add file → Upload files → Commit changes**).
 

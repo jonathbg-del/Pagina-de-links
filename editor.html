@@ -124,9 +124,9 @@
           <label for="pubToken">Chave de acesso (token)</label>
           <input type="text" id="pubToken" autocomplete="off" placeholder="github_pat_...">
           <div class="hint">
-            Como criar (uma vez só): abra <a id="tokenLink" target="_blank" rel="noopener">este link do GitHub</a> →
-            em <b>Repository access</b> escolha <b>Only select repositories</b> e marque este repositório →
-            em <b>Permissions → Contents</b> escolha <b>Read and write</b> → <b>Generate token</b> → copie e cole aqui.
+            Como criar (uma vez só): abra <a id="tokenLink" target="_blank" rel="noopener">este link do GitHub</a>
+            (já vem preenchido) → em <b>Expiration</b> escolha <b>No expiration</b> → confira se <b>public_repo</b> está marcado →
+            role até o fim e clique em <b>Generate token</b> → copie o código (começa com <code>ghp_</code>) e cole aqui.
           </div>
         </div>
       </div>
@@ -567,8 +567,8 @@
       document.getElementById("pubRepo").value = s.repo;
       document.getElementById("pubBranch").value = s.branch;
       document.getElementById("pubToken").value = s.token;
-      document.getElementById("tokenLink").href = "https://github.com/settings/personal-access-tokens/new?name=" +
-        encodeURIComponent("Editor pagina de links") + "&contents=write";
+      document.getElementById("tokenLink").href = "https://github.com/settings/tokens/new?scopes=public_repo&description=" +
+        encodeURIComponent("Editor pagina de links");
       document.getElementById("pubStatus").textContent = "";
       pubDlg.showModal();
     });
@@ -598,10 +598,11 @@
         toast("Publicado no site");
       }).catch(function (err) {
         var st = err && err.status;
-        status.textContent = st === 401 ? "Chave de acesso inválida ou vencida. Crie uma nova." :
-          st === 403 || st === 404 ? "Sem permissão. Confira usuário, repositório e se a chave tem Contents: Read and write para este repositório." :
-          st === 422 ? "O GitHub recusou o arquivo (" + ((err.json && err.json.message) || "erro") + "). Confira o nome do branch." :
-          "Não foi possível publicar. Verifique a internet e tente de novo.";
+        var detalhe = st ? " [GitHub " + st + ": " + ((err.json && err.json.message) || "sem mensagem") + "]" : "";
+        status.textContent = (st === 401 ? "Chave de acesso inválida ou vencida. Crie uma nova." :
+          st === 403 || st === 404 ? "Sem permissão para gravar. Crie a chave pelo link abaixo (com public_repo marcado) e cole de novo." :
+          st === 409 || st === 422 ? "O GitHub recusou o arquivo. Confira o nome do branch." :
+          "Não foi possível publicar. Verifique a internet e tente de novo.") + detalhe;
       }).then(function () { btn.disabled = false; });
     });
 
