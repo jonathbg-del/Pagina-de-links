@@ -18,7 +18,7 @@
 
 window.CONFIG = {
   pagina: {
-    titulo: "Sua Galega",
+    titulo: "Sua Galega RS",
     favicon: "img/favicon.svg"
   },
 
@@ -36,7 +36,7 @@ window.CONFIG = {
     formatoFoto: "circulo",      // circulo | arredondado | quadrado
     tamanhoFoto: 120,            // px
     bordaFoto: 3,                // px (0 = sem borda)
-    nome: "PS Sex Shop",
+    nome: "Sua Galega RS",
     subtitulo: "Prazer, sedução e discrição 🔥\nEntrega sigilosa para todo o Brasil",
     verificado: true
   },
@@ -140,7 +140,7 @@ window.CONFIG = {
   ],
 
   rodape: {
-    texto: "© PS Sex Shop • Venda proibida para menores de 18 anos",
+    texto: "© Sua Galega RS • Venda proibida para menores de 18 anos",
     tamanho: 12
   }
 };
