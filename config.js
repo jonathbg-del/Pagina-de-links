@@ -13,27 +13,36 @@ window.CONFIG = {
     "linkSair": "https://www.google.com"
   },
   "perfil": {
+    "layout": "capa",
+    "fotoCapa": "img/capa.svg",
+    "alturaCapa": 480,
+    "posicaoFotoCapa": "topo",
+    "tamanhoFade": 45,
+    "subirTexto": 70,
+    "fotoPerfilNaCapa": false,
     "foto": "img/perfil.svg",
     "formatoFoto": "circulo",
     "tamanhoFoto": 120,
     "bordaFoto": 3,
     "nome": "Sua Galega RS",
     "subtitulo": "Aqui a curiosidade  vira vontade +18",
-    "verificado": true
+    "verificado": true,
+    "tituloSecao": "Plataformas +18",
+    "tamanhoTituloSecao": 26
   },
   "cores": {
-    "fundoTopo": "#1a0010",
-    "fundoMeio": "#5a0631",
-    "fundoBase": "#0b0005",
+    "fundoTopo": "#5c0a22",
+    "fundoMeio": "#3d0616",
+    "fundoBase": "#1a020a",
     "anguloGradiente": 165,
     "texto": "#fff1f6",
-    "textoSecundario": "#f2a9c6",
-    "destaque": "#ff2e7e",
-    "botaoFundo": "#2b0618",
+    "textoSecundario": "#f7c2d0",
+    "destaque": "#e0234e",
+    "botaoFundo": "#2e0410",
     "botaoOpacidade": 0.55,
     "botaoTexto": "#ffffff",
-    "botaoBorda": "#ff2e7e",
-    "botaoHover": "#ff2e7e"
+    "botaoBorda": "#e0234e",
+    "botaoHover": "#e0234e"
   },
   "fundo": {
     "imagem": "",
@@ -68,7 +77,7 @@ window.CONFIG = {
     "particulas": true,
     "simbolo": "♥",
     "quantidade": 18,
-    "cor": "#ff2e7e",
+    "cor": "#e0234e",
     "tamanhoMaximo": 22
   },
   "links": [

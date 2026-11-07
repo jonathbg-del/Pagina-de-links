@@ -104,17 +104,37 @@
     bgImg.style.display = fundo.imagem ? "" : "none";
 
     // Perfil
+    var capa = perfil.layout === "capa";
+    document.body.classList.toggle("layout-capa", capa);
+    var posicoes = { topo: "top", centro: "center", baixo: "bottom" };
+    setVars({
+      "--capa-altura": (perfil.alturaCapa || 480) + "px",
+      "--capa-fade": (perfil.tamanhoFade == null ? 45 : perfil.tamanhoFade) + "%",
+      "--capa-subir": (perfil.subirTexto == null ? 70 : perfil.subirTexto) + "px",
+      "--capa-pos": posicoes[perfil.posicaoFotoCapa] || "top",
+      "--tam-secao": (perfil.tamanhoTituloSecao || 26) + "px"
+    });
+    var cover = $("cover");
+    cover.style.display = capa && perfil.fotoCapa ? "" : "none";
+    if (capa && perfil.fotoCapa) $("coverImg").src = perfil.fotoCapa;
+
     var avatar = $("avatar");
-    avatar.parentNode.style.display = perfil.foto ? "" : "none";
+    var mostrarAvatar = perfil.foto && (!capa || perfil.fotoPerfilNaCapa);
+    $("avatarWrap").style.display = mostrarAvatar ? "" : "none";
     if (perfil.foto) avatar.src = perfil.foto;
     avatar.alt = perfil.nome || "";
-    var oldBadge = avatar.parentNode.querySelector(".verified");
+    var oldBadge = $("avatarWrap").querySelector(".verified");
     if (oldBadge) oldBadge.remove();
-    if (perfil.verificado) {
+    if (perfil.verificado && mostrarAvatar) {
       avatar.insertAdjacentHTML("afterend", '<span class="verified" title="Perfil oficial"><i class="fa-solid fa-check"></i></span>');
     }
     $("name").textContent = perfil.nome || "";
+    if (perfil.verificado && !mostrarAvatar) {
+      $("name").insertAdjacentHTML("beforeend", ' <span class="name-check" title="Perfil oficial"><i class="fa-solid fa-circle-check"></i></span>');
+    }
     $("bio").textContent = perfil.subtitulo || "";
+    $("sectionTitle").textContent = perfil.tituloSecao || "";
+    $("sectionTitle").style.display = perfil.tituloSecao ? "" : "none";
 
     // Botões
     var nav = $("links");

@@ -186,9 +186,19 @@
     function load() {
       try {
         var saved = localStorage.getItem(STORAGE_KEY);
-        if (saved) return JSON.parse(saved);
+        // Rascunho antigo + opções novas que ele ainda não tinha
+        if (saved) return fillMissing(JSON.parse(saved), original);
       } catch (e) {}
       return JSON.parse(JSON.stringify(original));
+    }
+
+    function fillMissing(obj, defaults) {
+      Object.keys(defaults).forEach(function (k) {
+        var d = defaults[k];
+        if (obj[k] === undefined) obj[k] = JSON.parse(JSON.stringify(d));
+        else if (d && typeof d === "object" && !Array.isArray(d) && obj[k] && typeof obj[k] === "object") fillMissing(obj[k], d);
+      });
+      return obj;
     }
 
     function save() {
@@ -198,13 +208,27 @@
     // ---------- Campos de cada seção ----------
     var S = [
       { titulo: "Perfil", obj: "perfil", aberto: true, campos: [
-        ["foto", "Foto de perfil", "imagem", { full: true, max: 600 }],
+        ["layout", "Modelo do topo", "select", { full: true, opcoes: { capa: "Capa — foto grande com fade", classico: "Clássico — foto redonda" } }],
+        ["fotoCapa", "Foto da capa (modelo Capa)", "imagem", { full: true, max: 1200 }],
         ["nome", "Nome", "texto", { full: true }],
         ["subtitulo", "Frase / bio (Enter quebra linha)", "textarea", { full: true }],
+        ["tituloSecao", "Título acima dos botões (vazio = sem título)", "texto"],
+        ["tamanhoTituloSecao", "Tamanho do título acima dos botões", "range", { min: 14, max: 44, un: "px", padrao: 26 }],
+        ["verificado", "Selo de perfil oficial", "bool"]
+      ]},
+      { titulo: "Capa (foto grande no topo)", obj: "perfil", campos: [
+        ["alturaCapa", "Altura da foto", "range", { min: 240, max: 800, un: "px", padrao: 480 }],
+        ["posicaoFotoCapa", "Parte da foto que aparece", "select", { opcoes: { topo: "Topo (rosto)", centro: "Centro", baixo: "Baixo" }, padrao: "topo" }],
+        ["tamanhoFade", "Tamanho do fade na cor do fundo", "range", { min: 10, max: 100, un: "%", padrao: 45 }],
+        ["subirTexto", "Subir o nome sobre a foto", "range", { min: 0, max: 200, un: "px", padrao: 70 }],
+        ["fotoPerfilNaCapa", "Mostrar também a foto redonda", "bool"],
+        ["__dica", "A cor do fade é a cor “Fundo — topo” da seção Cores.", "dica", { full: true }]
+      ]},
+      { titulo: "Foto redonda (modelo Clássico)", obj: "perfil", campos: [
+        ["foto", "Foto de perfil", "imagem", { full: true, max: 600 }],
         ["formatoFoto", "Formato da foto", "select", { opcoes: { circulo: "Círculo", arredondado: "Arredondado", quadrado: "Quadrado" } }],
         ["tamanhoFoto", "Tamanho da foto", "range", { min: 60, max: 220, un: "px" }],
-        ["bordaFoto", "Borda da foto", "range", { min: 0, max: 10, un: "px" }],
-        ["verificado", "Selo de perfil oficial", "bool"]
+        ["bordaFoto", "Borda da foto", "range", { min: 0, max: 10, un: "px" }]
       ]},
       { titulo: "Cores", obj: "cores", campos: [
         ["fundoTopo", "Fundo — topo", "cor"],
@@ -345,7 +369,9 @@
     function buildField(target, key, label, type, opt, onChange) {
       opt = opt || {};
       var id = "f" + (++uid);
+      if (type === "dica") return el("div", { class: "hint" + (opt.full ? " full" : "") }, label);
       var val = getPath(target, key);
+      if (val === undefined && opt.padrao !== undefined) { val = opt.padrao; setPath(target, key, val); }
       var wrap = el("div", { class: "field" + (opt.full ? " full" : "") + (type === "bool" ? " switch" : "") });
       function set(v) { setPath(target, key, v); (onChange || changed)(); }
 
