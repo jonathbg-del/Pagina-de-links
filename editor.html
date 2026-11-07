@@ -76,7 +76,8 @@
 <body>
   <header class="top">
     <h1><i class="fa-solid fa-wand-magic-sparkles"></i> Editor da página</h1>
-    <button class="primary" id="btnDownload"><i class="fa-solid fa-download"></i> Baixar config.js</button>
+    <button class="primary" id="btnPublish"><i class="fa-solid fa-cloud-arrow-up"></i> Publicar no site</button>
+    <button id="btnDownload"><i class="fa-solid fa-download"></i> Baixar config.js</button>
     <button id="btnCopy"><i class="fa-regular fa-copy"></i> Copiar código</button>
     <button id="btnImport"><i class="fa-solid fa-file-import"></i> Importar</button>
     <button id="btnReset" title="Volta para o config.js publicado"><i class="fa-solid fa-rotate-left"></i> Desfazer tudo</button>
@@ -88,8 +89,8 @@
         <strong>Como publicar suas mudanças</strong>
         <ol>
           <li>Ajuste tudo aqui — a prévia ao lado atualiza na hora (suas mudanças ficam salvas neste navegador).</li>
-          <li>Clique em <b>Baixar config.js</b>.</li>
-          <li>No GitHub, abra o repositório → <b>Add file → Upload files</b> → envie o config.js baixado → <b>Commit changes</b>. Em 1–2 minutos o site atualiza.</li>
+          <li>Clique em <b>Publicar no site</b>. Em 1–2 minutos o site atualiza.</li>
+          <li>Na primeira vez, o editor pede uma chave de acesso do GitHub (fica salva só neste aparelho).</li>
         </ol>
       </div>
       <div id="sections"></div>
@@ -107,6 +108,32 @@
       <div class="row" style="justify-content:flex-end;margin-top:10px">
         <button value="cancel">Cancelar</button>
         <button class="primary" value="ok" id="importOk">Importar</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="publishDlg">
+    <form method="dialog">
+      <h3 style="margin-top:0">Publicar no site</h3>
+      <p class="hint">O editor salva o config.js direto no seu repositório do GitHub. Estes dados ficam guardados só neste navegador.</p>
+      <div class="fields" style="padding:0">
+        <div class="field"><label for="pubOwner">Usuário do GitHub</label><input type="text" id="pubOwner"></div>
+        <div class="field"><label for="pubRepo">Repositório</label><input type="text" id="pubRepo"></div>
+        <div class="field full"><label for="pubBranch">Branch publicado no GitHub Pages</label><input type="text" id="pubBranch"></div>
+        <div class="field full">
+          <label for="pubToken">Chave de acesso (token)</label>
+          <input type="text" id="pubToken" autocomplete="off" placeholder="github_pat_...">
+          <div class="hint">
+            Como criar (uma vez só): abra <a id="tokenLink" target="_blank" rel="noopener">este link do GitHub</a> →
+            em <b>Repository access</b> escolha <b>Only select repositories</b> e marque este repositório →
+            em <b>Permissions → Contents</b> escolha <b>Read and write</b> → <b>Generate token</b> → copie e cole aqui.
+          </div>
+        </div>
+      </div>
+      <p class="hint" id="pubStatus"></p>
+      <div class="row" style="justify-content:flex-end;margin-top:10px">
+        <button value="cancel">Fechar</button>
+        <button class="primary" value="ok" id="pubOk"><i class="fa-solid fa-cloud-arrow-up"></i> Publicar agora</button>
       </div>
     </form>
   </dialog>
@@ -147,7 +174,8 @@
     <option value="💋">💋</option><option value="🔥">🔥</option><option value="❤️">❤️</option><option value="✨">✨</option><option value="🍒">🍒</option>
   </datalist>
 
-  <script src="config.js"></script>
+  <!-- carrega sempre a versão mais nova do config.js -->
+  <script>document.write('<script src="config.js?v=' + Date.now() + '"><\/script>');</script>
   <script>
   (function () {
     "use strict";
@@ -497,6 +525,84 @@
         if (!obj || typeof obj !== "object") throw 0;
         cfg = obj; save(); buildAll(); sendPreview(); toast("Configuração importada");
       } catch (e) { alert("Não consegui ler esse conteúdo. Cole o arquivo config.js completo."); }
+    });
+
+
+    // ---------- Publicar direto no GitHub ----------
+    var PUB_KEY = "editor-pagina-links-publicar";
+    var pubDlg = document.getElementById("publishDlg");
+    function pubSettings() {
+      var s = {};
+      try { s = JSON.parse(localStorage.getItem(PUB_KEY) || "{}"); } catch (e) {}
+      // No GitHub Pages o endereço é usuario.github.io/repositorio/
+      var host = location.hostname.match(/^([^.]+)\.github\.io$/i);
+      var seg = location.pathname.split("/").filter(Boolean)[0];
+      return {
+        owner: s.owner || (host ? host[1] : "jonathbg-del"),
+        repo: s.repo || (host && seg && !/\.html$/.test(seg) ? seg : "Pagina-de-links"),
+        branch: s.branch || "ccr-97d5effa-nc0xmi",
+        token: s.token || ""
+      };
+    }
+    function b64(str) {
+      var bytes = new TextEncoder().encode(str), bin = "";
+      for (var i = 0; i < bytes.length; i += 0x8000) bin += String.fromCharCode.apply(null, bytes.subarray(i, i + 0x8000));
+      return btoa(bin);
+    }
+    function api(s, method, body) {
+      var url = "https://api.github.com/repos/" + encodeURIComponent(s.owner) + "/" + encodeURIComponent(s.repo) +
+        "/contents/config.js" + (method === "GET" ? "?ref=" + encodeURIComponent(s.branch) : "");
+      return fetch(url, {
+        method: method,
+        headers: { "Authorization": "Bearer " + s.token, "Accept": "application/vnd.github+json" },
+        body: body ? JSON.stringify(body) : undefined,
+        cache: "no-store"
+      }).then(function (r) {
+        return r.json().catch(function () { return {}; }).then(function (j) { return { ok: r.ok, status: r.status, json: j }; });
+      });
+    }
+    document.getElementById("btnPublish").addEventListener("click", function () {
+      var s = pubSettings();
+      document.getElementById("pubOwner").value = s.owner;
+      document.getElementById("pubRepo").value = s.repo;
+      document.getElementById("pubBranch").value = s.branch;
+      document.getElementById("pubToken").value = s.token;
+      document.getElementById("tokenLink").href = "https://github.com/settings/personal-access-tokens/new?name=" +
+        encodeURIComponent("Editor pagina de links") + "&contents=write";
+      document.getElementById("pubStatus").textContent = "";
+      pubDlg.showModal();
+    });
+    document.getElementById("pubOk").addEventListener("click", function (ev) {
+      ev.preventDefault();
+      var s = {
+        owner: document.getElementById("pubOwner").value.trim(),
+        repo: document.getElementById("pubRepo").value.trim(),
+        branch: document.getElementById("pubBranch").value.trim(),
+        token: document.getElementById("pubToken").value.trim()
+      };
+      var status = document.getElementById("pubStatus"), btn = this;
+      if (!s.owner || !s.repo || !s.branch || !s.token) { status.textContent = "Preencha todos os campos."; return; }
+      try { localStorage.setItem(PUB_KEY, JSON.stringify(s)); } catch (e) {}
+      btn.disabled = true; status.textContent = "Publicando…";
+      api(s, "GET").then(function (cur) {
+        if (!cur.ok && cur.status !== 404) throw cur;
+        return api(s, "PUT", {
+          message: "Atualiza a página pelo editor",
+          content: b64(code()),
+          branch: s.branch,
+          sha: cur.ok ? cur.json.sha : undefined
+        });
+      }).then(function (res) {
+        if (!res.ok) throw res;
+        status.textContent = "Publicado! O site atualiza em 1–2 minutos (se não aparecer, recarregue a página).";
+        toast("Publicado no site");
+      }).catch(function (err) {
+        var st = err && err.status;
+        status.textContent = st === 401 ? "Chave de acesso inválida ou vencida. Crie uma nova." :
+          st === 403 || st === 404 ? "Sem permissão. Confira usuário, repositório e se a chave tem Contents: Read and write para este repositório." :
+          st === 422 ? "O GitHub recusou o arquivo (" + ((err.json && err.json.message) || "erro") + "). Confira o nome do branch." :
+          "Não foi possível publicar. Verifique a internet e tente de novo.";
+      }).then(function () { btn.disabled = false; });
     });
 
     buildAll();

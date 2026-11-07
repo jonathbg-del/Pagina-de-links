@@ -41,7 +41,8 @@
     </div>
   </div>
 
-  <script src="config.js"></script>
+  <!-- carrega sempre a versão mais nova do config.js -->
+  <script>document.write('<script src="config.js?v=' + Date.now() + '"><\/script>');</script>
   <script src="app.js"></script>
 </body>
 </html>

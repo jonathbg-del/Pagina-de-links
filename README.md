@@ -30,9 +30,14 @@ Esse é o link que você coloca na bio do Instagram, TikTok, etc.
 ### Jeito fácil: editor visual
 1. Abra `https://SEU-ENDERECO/editor.html`.
 2. Mude o que quiser — a prévia do celular atualiza na hora. Dá para enviar fotos direto do celular/computador.
-3. Clique em **Baixar config.js**.
-4. No GitHub: **Add file → Upload files** → arraste o `config.js` baixado → **Commit changes**.
-   O site atualiza sozinho em 1–2 minutos.
+3. Clique em **Publicar no site**. Em 1–2 minutos o site atualiza.
+4. Na primeira vez, o editor pede uma **chave de acesso (token)** do GitHub, que fica salva só naquele aparelho:
+   - abra https://github.com/settings/personal-access-tokens/new
+   - **Repository access** → *Only select repositories* → marque `Pagina-de-links`
+   - **Permissions → Contents** → *Read and write*
+   - **Generate token**, copie e cole no editor.
+
+Sem token, também dá para clicar em **Baixar config.js** e enviar o arquivo pelo GitHub (**Add file → Upload files → Commit changes**).
 
 ### Jeito direto: editar o `config.js`
 No GitHub, abra `config.js`, clique no lápis ✏️, altere e clique em **Commit changes**. O arquivo é comentado em português.
