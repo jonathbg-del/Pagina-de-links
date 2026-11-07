@@ -18,7 +18,7 @@
 
 window.CONFIG = {
   pagina: {
-    titulo: "PS Sex Shop | Links oficiais",
+    titulo: "Sua Galega",
     favicon: "img/favicon.svg"
   },
 
