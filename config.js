@@ -1,4 +1,4 @@
-/* Configuração gerada pelo editor.html — 07/11/2026, 21:51:28 */
+/* Configuração gerada pelo editor.html — 07/11/2026, 22:01:25 */
 window.CONFIG = {
   "pagina": {
     "titulo": "Sua Galega RS",
@@ -75,7 +75,7 @@ window.CONFIG = {
   },
   "efeitos": {
     "particulas": true,
-    "simbolo": "♥",
+    "simbolo": "🔥",
     "quantidade": 18,
     "cor": "#e0234e",
     "tamanhoMaximo": 22
