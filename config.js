@@ -1,4 +1,4 @@
-/* Configuração gerada pelo editor.html — 07/11/2026, 21:47:05 */
+/* Configuração gerada pelo editor.html — 07/11/2026, 21:51:28 */
 window.CONFIG = {
   "pagina": {
     "titulo": "Sua Galega RS",
@@ -25,7 +25,7 @@ window.CONFIG = {
     "tamanhoFoto": 120,
     "bordaFoto": 3,
     "nome": "Sua Galega RS",
-    "subtitulo": "Aqui a curiosidade  vira vontade +18",
+    "subtitulo": "Aqui a curiosidade  vira vontade",
     "verificado": true,
     "tituloSecao": "Plataformas +18",
     "tamanhoTituloSecao": 26
