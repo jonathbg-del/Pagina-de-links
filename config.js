@@ -1,4 +1,4 @@
-/* Configuração gerada pelo editor.html — 07/11/2026, 18:33:54 */
+/* Configuração gerada pelo editor.html — 07/11/2026, 21:12:46 */
 window.CONFIG = {
   "pagina": {
     "titulo": "Sua Galega RS",
@@ -83,6 +83,16 @@ window.CONFIG = {
   "links": [
     {
       "ativo": true,
+      "texto": "Telegram VIP",
+      "subtexto": "Aqui está o que procura!",
+      "url": "https://t.me/mayejonpremium_bot",
+      "icone": "fa-brands fa-telegram",
+      "destaque": false,
+      "corFundo": "",
+      "corTexto": ""
+    },
+    {
+      "ativo": true,
       "texto": "PS Sex Shop",
       "subtexto": "Entrega discreta para todo o Brasil",
       "url": "https://pssexshop.com.br",
@@ -107,16 +117,6 @@ window.CONFIG = {
       "subtexto": "@suagalegars",
       "url": "https://www.instagram.com/suagalegars?mdxt=MWw0cGl1emRoNG14dQ==",
       "icone": "fa-brands fa-whatsapp",
-      "destaque": false,
-      "corFundo": "",
-      "corTexto": ""
-    },
-    {
-      "ativo": true,
-      "texto": "Telegram VIP",
-      "subtexto": "Aqui está o que procura!",
-      "url": "https://t.me/mayejonpremium_bot",
-      "icone": "fa-brands fa-telegram",
       "destaque": false,
       "corFundo": "",
       "corTexto": ""
