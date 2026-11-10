@@ -1,4 +1,4 @@
-/* Configuração gerada pelo editor.html — 09/11/2026, 21:34:47 */
+/* Configuração gerada pelo editor.html — 09/11/2026, 21:38:46 */
 window.CONFIG = {
   "pagina": {
     "titulo": "Sua Galega RS",
@@ -96,7 +96,7 @@ window.CONFIG = {
       "texto": "Telegram FREE",
       "subtexto": "Só um gostinho",
       "url": "https://t.me/+hDuDTGNECqYyODBh",
-      "icone": "fa-solid fa-link",
+      "icone": "fa-brands fa-telegram",
       "destaque": true,
       "corFundo": "",
       "corTexto": ""
@@ -126,7 +126,7 @@ window.CONFIG = {
       "texto": "Instagram Reserva",
       "subtexto": "@suagalegars",
       "url": "https://www.instagram.com/suagalegars?mdxt=MWw0cGl1emRoNG14dQ==",
-      "icone": "fa-brands fa-whatsapp",
+      "icone": "fa-brands fa-instagram",
       "destaque": false,
       "corFundo": "",
       "corTexto": ""
