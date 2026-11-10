@@ -1,4 +1,4 @@
-/* Configuração gerada pelo editor.html — 07/11/2026, 22:01:25 */
+/* Configuração gerada pelo editor.html — 09/11/2026, 21:34:45 */
 window.CONFIG = {
   "pagina": {
     "titulo": "Sua Galega RS",
@@ -88,6 +88,16 @@ window.CONFIG = {
       "url": "https://t.me/mayejonpremium_bot",
       "icone": "fa-brands fa-telegram",
       "destaque": false,
+      "corFundo": "",
+      "corTexto": ""
+    },
+    {
+      "ativo": true,
+      "texto": "Telegram FREE",
+      "subtexto": "Só um gostinho",
+      "url": "https://t.me/+hDuDTGNECqYyODBh",
+      "icone": "fa-solid fa-link",
+      "destaque": true,
       "corFundo": "",
       "corTexto": ""
     },
