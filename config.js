@@ -1,4 +1,4 @@
-/* Configuração gerada pelo editor.html — 13/11/2026, 14:26:16 */
+/* Configuração gerada pelo editor.html — 16/11/2026, 22:08:13 */
 window.CONFIG = {
   "pagina": {
     "titulo": "Sua Galega RS",
@@ -114,7 +114,7 @@ window.CONFIG = {
     {
       "ativo": true,
       "texto": "Instagram Oficial",
-      "subtexto": "@mattje_maya",
+      "subtexto": "@suagalegars",
       "url": "https://www.instagram.com/mattje_maya?rpxt=aHk0YW1kdG50OHJl",
       "icone": "fa-brands fa-instagram",
       "destaque": false,
@@ -124,7 +124,7 @@ window.CONFIG = {
     {
       "ativo": true,
       "texto": "Instagram Reserva",
-      "subtexto": "@suagalegars",
+      "subtexto": "@suagalegars1",
       "url": "https://www.instagram.com/suagalegars?mdxt=MWw0cGl1emRoNG14dQ==",
       "icone": "fa-brands fa-instagram",
       "destaque": false,
