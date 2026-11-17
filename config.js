@@ -1,11 +1,11 @@
-/* Configuração gerada pelo editor.html — 16/11/2026, 22:12:30 */
+/* Configuração gerada pelo editor.html — 16/11/2026, 23:06:44 */
 window.CONFIG = {
   "pagina": {
     "titulo": "Sua Galega RS",
     "favicon": "img/favicon.svg"
   },
   "aviso18": {
-    "ativo": true,
+    "ativo": false,
     "titulo": "Conteúdo para maiores de 18 anos",
     "texto": "Esta página contém produtos e conteúdos adultos. Confirme que você tem 18 anos ou mais para continuar.",
     "botaoSim": "Tenho 18 anos ou mais",
@@ -27,7 +27,7 @@ window.CONFIG = {
     "nome": "Sua Galega RS",
     "subtitulo": "Aqui a curiosidade  vira vontade",
     "verificado": true,
-    "tituloSecao": "Plataformas +18",
+    "tituloSecao": "Plataformas",
     "tamanhoTituloSecao": 26
   },
   "cores": {
@@ -133,7 +133,7 @@ window.CONFIG = {
     }
   ],
   "rodape": {
-    "texto": "© Sua Galega RS • Venda proibida para menores de 18 anos",
+    "texto": "© Sua Galega RS • Todos os direitos reservados ",
     "tamanho": 12
   }
 };
