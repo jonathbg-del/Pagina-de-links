@@ -1,4 +1,4 @@
-/* Configuração gerada pelo editor.html — 16/11/2026, 23:06:44 */
+/* Configuração gerada pelo editor.html — 26/11/2026, 21:26:30 */
 window.CONFIG = {
   "pagina": {
     "titulo": "Sua Galega RS",
@@ -93,7 +93,7 @@ window.CONFIG = {
     },
     {
       "ativo": true,
-      "texto": "Telegram FREE",
+      "texto": "Canal Prévias",
       "subtexto": "Só um gostinho",
       "url": "https://t.me/+hDuDTGNECqYyODBh",
       "icone": "fa-brands fa-telegram",
